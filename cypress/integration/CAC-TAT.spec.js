@@ -57,7 +57,7 @@ describe('Central de Atendimento TAT', () => {
     cy.get('#firstName').type('Gustavo', { delay: 0 }).should('have.value', 'Gustavo').clear().should('have.value', '')
     cy.get('#lastName').type('Silva Fernandes', { delay: 0 }).should('have.value', 'Silva Fernandes').clear().should('have.value', '')
     cy.get('#email').type('gustavo.silva@gmail.com', { delay: 0 }).should('have.value', 'gustavo.silva@gmail.com').clear().should('have.value', '')
-    cy.get('#phone').type('(55)998394893', { delay: 0 }).should('have.value', '55998394893').clear().should('have.value', '')
+    cy.get('#phon').type('(55)998394893', { delay: 0 }).should('have.value', '55998394893').clear().should('have.value', '')
   })
 
   it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', () => {
