@@ -1,14 +1,12 @@
 /// <reference types="Cypress"/>
 
-import { watchFile } from "fs-extra"
-
-
-
 describe('Central de Atendimento TAT', () => {
+ const three_seconds_in_ms=3000
 
+  
   beforeEach(() => {
-    //cy.visit("../src/index.html")
-    cy.visit("https://appstoreconnect.apple.com/login")
+    cy.visit("../src/index.html")
+   // cy.visit("https://appstoreconnect.apple.com/login")
   })
 
   it('verifica o titulo da aplicação', () => {
@@ -43,6 +41,7 @@ describe('Central de Atendimento TAT', () => {
   })
 
   it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', () => {
+    cy.clock()
     cy.get('#firstName').type('Gustavo', { delay: 0 })
     cy.get('#lastName').type('Silva Fernandes', { delay: 0 })
     cy.get('#email').type('gustavo.silva@gmail.com', { delay: 0 })
@@ -50,6 +49,8 @@ describe('Central de Atendimento TAT', () => {
     cy.get('#open-text-area').type('i dont need help, thanks. Eu não preciso de ajuda, obrigado', { delay: 0 })
     cy.contains('.button', 'Enviar').click()
     cy.get('.error > strong').should('be.visible')
+    cy.tick(three_seconds_in_ms)
+    cy.get('.error > strong').should('not.be.visible')
   })
 
   it('preenche e limpa os campos nome, sobrenome, email e telefone', () => {
@@ -144,16 +145,15 @@ describe('Central de Atendimento TAT', () => {
     cy.contains('Talking About Testing').should('be.visible')
   })
 
-  it.only('teste pedro',()=>{
+  /*it('teste pedro',()=>{
 
     cy.wait(3000)
     cy.xpath('/html/body/div[3]/apple-auth/div/div[1]/div/sign-in/div/div[1]/div[1]/div/div/div[1]/div/div/input')
     .dblclick({force:true}).clear().type('teste')
-
     //cy.get('input[type="text"]')
     //cy.get('#aid-auth-widget-iFrame').invoke('removeAttr','#aid-auth-widget-iFrame' )
     //cy.get('#account_name_text_field').type('teste')
-  })
+  })*/
 
  
 
